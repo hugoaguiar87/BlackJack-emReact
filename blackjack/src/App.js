@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from 'styled-components'
+import {SorteioCartas} from './Componentes/sorteioCartas.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const ContainerPai = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+class App extends React.Component {
+  
+  distribuiCartas = () => {
+    return {SorteioCartas}
+  }
+
+  render() {
+    return (
+      <ContainerPai>
+        <div>
+          <h1> Seja Bem-Vindo(a) ao <i>BlackJack!</i></h1>
+        </div>        
+        <button onClick = {this.distribuiCartas}>Começar Jogo!</button>
+
+      </ContainerPai>
+    );
+  }
+  
 }
 
 export default App;
