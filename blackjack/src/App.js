@@ -10,17 +10,15 @@ const ContainerPai = styled.div`
 
 class App extends React.Component {
   
-  distribuiCartas = () => {
-    return {SorteioCartas}
-  }
-
+  
   render() {
     return (
       <ContainerPai>
         <div>
           <h1> Seja Bem-Vindo(a) ao <i>BlackJack!</i></h1>
         </div>        
-        <button onClick = {this.distribuiCartas}>Começar Jogo!</button>
+        <button>Começar Jogo!</button>
+        <SorteioCartas/>
 
       </ContainerPai>
     );
