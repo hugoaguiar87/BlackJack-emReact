@@ -3,6 +3,9 @@ import styled from 'styled-components'
 
 import comprarCarta from './Componentes/comprarCarta';
 import {ContainerPai} from './Componentes/styled'
+import {DivdasCartas} from './Componentes/styled'
+import {PagCartas} from './Componentes/styled'
+
 
 let primeiraCartaUsuario 
 let segundaCartaUsuario 
@@ -13,7 +16,8 @@ let segundaCartaComputador
 class App extends React.Component {
   state = {
     cartasUsuario: [],
-    cartasPC: []
+    cartasPC: [],
+    paginaRenderizada: "inicial"
   }
 
   sorteioDeCartas = () => {
@@ -33,9 +37,29 @@ class App extends React.Component {
 
    this.setState({
      cartasUsuario: [primeiraCartaUsuario, segundaCartaUsuario],
-     cartasPC: [primeiraCartaComputador, segundaCartaComputador]
+     cartasPC: [primeiraCartaComputador, segundaCartaComputador],
+     paginaRenderizada: "sorteioCartas"
    })
   }
+
+  paginaRenderizada = () => {
+    switch (this.state.paginaRenderizada){
+      case 'inicial':
+        return this.paginaInicial()
+      case 'sorteioCartas' :
+        return this.paginaCartasSorteadas()
+    }
+  }
+
+  paginaInicial = () => {
+    return(
+      <ContainerPai>
+              
+        <button onClick={this.sorteioDeCartas}>Começar Jogo!</button>
+      </ContainerPai>
+    )
+  }
+
   paginaCartasSorteadas = () => {
     console.log("cu2", this.state.cartasUsuario)
     console.log("cpc2", this.state.cartasPC)
@@ -45,8 +69,8 @@ class App extends React.Component {
 
 
     return(
-      <div>
-        <div>
+      <PagCartas>
+        <DivdasCartas>
           <h3>Cartas do Usuário</h3>
           {this.state.cartasUsuario.map((iten)=>{
           return(
@@ -57,13 +81,21 @@ class App extends React.Component {
           )
           })}
           <p>Valor Total = {valorTotalUsuário}</p>
-        </div>
+        </DivdasCartas>
 
-        <div>
+        <DivdasCartas>
           <h3>Cartas do Computador</h3>
           { this.state.cartasPC.length > 0 && <p>{this.state.cartasPC[0].texto}</p> }
+        </DivdasCartas>
+
+        <div className="opcoes">
+          <h3>Deseja pegar mais uma carta?</h3>
+          <div>
+            <button>Sim</button>
+            <button>Não</button>
+          </div>  
         </div>
-      </div>
+      </PagCartas>
     )
 
   }  
@@ -72,10 +104,10 @@ class App extends React.Component {
       <ContainerPai>
         <div>
           <h1> Seja Bem-Vindo(a) ao <i>BlackJack!</i></h1>
-        </div>        
-        <button onClick={this.sorteioDeCartas}>Começar Jogo!</button>
+        </div>
+        {this.paginaRenderizada()}
         
-        {this.paginaCartasSorteadas()}
+      
         
       </ContainerPai>
     );
