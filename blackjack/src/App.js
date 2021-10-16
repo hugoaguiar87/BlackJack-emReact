@@ -20,6 +20,11 @@ class App extends React.Component {
     paginaRenderizada: "inicial"
   }
 
+  componentDidUpdate() {
+    this.paginaCartasSorteadas()
+  }
+
+
   sorteioDeCartas = () => {
     primeiraCartaUsuario = comprarCarta()
     segundaCartaUsuario = comprarCarta()
@@ -42,6 +47,15 @@ class App extends React.Component {
    })
   }
 
+  sortearNovaCarta = () => {
+    let novaCartaComprada = comprarCarta()
+    this.setState({cartasUsuario:[...this.state.cartasUsuario, novaCartaComprada]})
+    console.log("foi ativado")
+    
+
+    
+  }
+
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
       case 'inicial':
@@ -62,7 +76,7 @@ class App extends React.Component {
 
   paginaCartasSorteadas = () => {
     console.log("cu2", this.state.cartasUsuario)
-    console.log("cpc2", this.state.cartasPC)
+    
 
 
     const valorTotalUsuário = this.state.cartasUsuario.reduce((preVal, element) => preVal + element.valor, 0)
@@ -91,7 +105,7 @@ class App extends React.Component {
         <div className="opcoes">
           <h3>Deseja pegar mais uma carta?</h3>
           <div>
-            <button>Sim</button>
+            <button onClick={this.sortearNovaCarta}>Sim</button>
             <button>Não</button>
           </div>  
         </div>
