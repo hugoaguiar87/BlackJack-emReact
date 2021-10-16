@@ -5,6 +5,8 @@ export const ContainerPai = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
+
+
 `
 
 export const DivdasCartas = styled.div`

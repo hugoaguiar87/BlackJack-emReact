@@ -80,8 +80,13 @@ class App extends React.Component {
   paginaInicial = () => {
     return(
       <ContainerPai>
-        <a href="https://pt.wikipedia.org/wiki/Blackjack"><button>Regras</button></a>
+        <a href="https://pt.wikipedia.org/wiki/Blackjack" target="_blank"><button>Regras</button></a>
         <button onClick={this.sorteioDeCartas}>Começar Jogo!</button>
+
+        <footer>
+          <h5>Criado por <a href="https://www.linkedin.com/in/hugoaguiar87/" target="_blank">Hugo Aguiar</a></h5>
+        </footer>
+        
       </ContainerPai>
     )
   }
@@ -298,7 +303,6 @@ class App extends React.Component {
         </div>
         {this.paginaRenderizada()}
         
-      
         
       </ContainerPai>
     );
