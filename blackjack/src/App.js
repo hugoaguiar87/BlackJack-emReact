@@ -76,41 +76,77 @@ class App extends React.Component {
 
   paginaCartasSorteadas = () => {
     console.log("cu2", this.state.cartasUsuario)
-    
-
-
     const valorTotalUsuário = this.state.cartasUsuario.reduce((preVal, element) => preVal + element.valor, 0)
+    const valorTotalPC = this.state.cartasPC.reduce((preVal , element)=> preVal + element.valor, 0)
 
 
-    return(
-      <PagCartas>
-        <DivdasCartas>
-          <h3>Cartas do Usuário</h3>
-          {this.state.cartasUsuario.map((iten)=>{
-          return(
+    if(valorTotalUsuário <= 21) {
+      return(
+        <PagCartas>
+          <DivdasCartas>
+            <h3>Cartas do Usuário</h3>
+            {this.state.cartasUsuario.map((iten)=>{
+            return(
+              <div>
+                <p>{iten.texto}</p>
+              </div>
+              
+            )
+            })}
+            <p>Valor Total = {valorTotalUsuário}</p>
+          </DivdasCartas>
+  
+          <DivdasCartas>
+            <h3>Cartas do Computador</h3>
+            { this.state.cartasPC.length > 0 && <p>{this.state.cartasPC[0].texto}</p> }
+          </DivdasCartas>
+  
+          <div className="opcoes">
+            <h3>Deseja pegar mais uma carta?</h3>
             <div>
-              <p>{iten.texto}</p>
-            </div>
-            
-          )
-          })}
-          <p>Valor Total = {valorTotalUsuário}</p>
-        </DivdasCartas>
+              <button onClick={this.sortearNovaCarta}>Sim</button>
+              <button>Não</button>
+            </div>  
+          </div>
+        </PagCartas>
+      )
+    } else if (valorTotalUsuário > 21) {
+      return(
+        <PagCartas>
+          <DivdasCartas>
+            <h3>Cartas do Usuário</h3>
+            {this.state.cartasUsuario.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+              
+            )
+            })}
+            <p>Valor Total = {valorTotalUsuário}</p>
+          </DivdasCartas>
+  
+          <DivdasCartas>
+            <h3>Cartas do Computador</h3>
+            {this.state.cartasPC.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+              
+            )
+            })}
+            <p>Valor Total = {valorTotalPC}</p>
 
-        <DivdasCartas>
-          <h3>Cartas do Computador</h3>
-          { this.state.cartasPC.length > 0 && <p>{this.state.cartasPC[0].texto}</p> }
-        </DivdasCartas>
-
-        <div className="opcoes">
-          <h3>Deseja pegar mais uma carta?</h3>
-          <div>
-            <button onClick={this.sortearNovaCarta}>Sim</button>
-            <button>Não</button>
-          </div>  
-        </div>
-      </PagCartas>
-    )
+          </DivdasCartas>
+  
+          <div className="perdeu">
+            <h1>VOCÊ PERDEU!</h1>
+            <button>Jogar Novamente</button>
+          </div>
+        </PagCartas>
+      )
+    }
 
   }  
   render() {

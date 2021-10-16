@@ -21,7 +21,7 @@ export const PagCartas = styled.div `
     grid-template-rows: 1fr 1fr;
     gap: 10px;
 
-    .opcoes{
+    .opcoes, .perdeu {
         grid-column: 1/3;
         text-align: center;
         display: flex;
