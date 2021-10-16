@@ -57,6 +57,14 @@ class App extends React.Component {
     this.setState({paginaRenderizada: "resultado"})
   }
 
+  jogarNovamente = () => {
+    this.setState({
+      cartasUsuario: [],
+      cartasPC: [],
+      paginaRenderizada: "inicial"
+    })
+  }
+
 
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
@@ -146,7 +154,7 @@ class App extends React.Component {
   
           <div className="perdeu">
             <h1>VOCÊ PERDEU!</h1>
-            <button>Jogar Novamente</button>
+            <button onClick={this.jogarNovamente}>Jogar Novamente</button>
           </div>
         </PagCartas>
       )
@@ -197,7 +205,7 @@ class App extends React.Component {
   
           <div className="perdeu">
             <h1>PARABÉNS! VOCÊ GANHOU!</h1>
-            <button>Jogar Novamente</button>
+            <button onClick={this.jogarNovamente}>Jogar Novamente</button>
           </div>
         </PagCartas>
         )
@@ -236,7 +244,7 @@ class App extends React.Component {
 
         <div className="perdeu">
           <h1>O JOGO TERMINOU EMPATADO!</h1>
-          <button>Jogar Novamente</button>
+          <button onClick={this.jogarNovamente}>Jogar Novamente</button>
         </div>
       </PagCartas>
       )
@@ -274,7 +282,7 @@ class App extends React.Component {
 
         <div className="perdeu">
           <h1>O COMPUTADOR VENCEU!</h1>
-          <button>Jogar Novamente</button>
+          <button onClick={this.jogarNovamente}>Jogar Novamente</button>
         </div>
       </PagCartas>
       )
