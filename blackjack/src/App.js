@@ -80,7 +80,7 @@ class App extends React.Component {
   paginaInicial = () => {
     return(
       <ContainerPai>
-              
+        <a href="https://pt.wikipedia.org/wiki/Blackjack"><button>Regras</button></a>
         <button onClick={this.sorteioDeCartas}>Começar Jogo!</button>
       </ContainerPai>
     )
