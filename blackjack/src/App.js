@@ -50,11 +50,13 @@ class App extends React.Component {
   sortearNovaCarta = () => {
     let novaCartaComprada = comprarCarta()
     this.setState({cartasUsuario:[...this.state.cartasUsuario, novaCartaComprada]})
-    console.log("foi ativado")
-    
-
-    
+    console.log("foi ativado")  
   }
+
+  jogadaDoPC = () => {
+    this.setState({paginaRenderizada: "resultado"})
+  }
+
 
   paginaRenderizada = () => {
     switch (this.state.paginaRenderizada){
@@ -62,6 +64,8 @@ class App extends React.Component {
         return this.paginaInicial()
       case 'sorteioCartas' :
         return this.paginaCartasSorteadas()
+      case 'resultado' :
+        return this.paginaResultado()
     }
   }
 
@@ -105,7 +109,7 @@ class App extends React.Component {
             <h3>Deseja pegar mais uma carta?</h3>
             <div>
               <button onClick={this.sortearNovaCarta}>Sim</button>
-              <button>Não</button>
+              <button onClick={this.jogadaDoPC}>Não</button>
             </div>  
           </div>
         </PagCartas>
@@ -147,8 +151,137 @@ class App extends React.Component {
         </PagCartas>
       )
     }
+  }
+  
+  paginaResultado = () => {
+    const valorTotalUsuário = this.state.cartasUsuario.reduce((preVal, element) => preVal + element.valor, 0)
+    let valorTotalPC = this.state.cartasPC.reduce((preVal , element)=> preVal + element.valor, 0)
+    console.log ("Fora loop", valorTotalPC)
 
-  }  
+    while (valorTotalPC < valorTotalUsuário) {
+      let novaCartaPC = comprarCarta()
+      this.state.cartasPC.push(novaCartaPC)
+      valorTotalPC = this.state.cartasPC.reduce((preVal , element)=> preVal + element.valor, 0)
+      console.log ("loop", valorTotalPC)
+
+
+      if(valorTotalPC > 21) {
+        return(
+          <PagCartas>
+          <DivdasCartas>
+            <h3>Cartas do Usuário</h3>
+            {this.state.cartasUsuario.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+              
+            )
+            })}
+            <p>Valor Total = {valorTotalUsuário}</p>
+          </DivdasCartas>
+  
+          <DivdasCartas>
+            <h3>Cartas do Computador</h3>
+            {this.state.cartasPC.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+              
+            )
+            })}
+            <p>Valor Total = {valorTotalPC}</p>
+
+          </DivdasCartas>
+  
+          <div className="perdeu">
+            <h1>PARABÉNS! VOCÊ GANHOU!</h1>
+            <button>Jogar Novamente</button>
+          </div>
+        </PagCartas>
+        )
+      }
+    }
+
+    if(valorTotalPC === valorTotalUsuário) {
+      return(
+        <PagCartas>
+        <DivdasCartas>
+          <h3>Cartas do Usuário</h3>
+          {this.state.cartasUsuario.map((iten)=>{
+            return(
+              <div>
+                <p>{iten.texto}</p>
+              </div>
+            
+          )
+          })}
+          <p>Valor Total = {valorTotalUsuário}</p>
+        </DivdasCartas>
+
+        <DivdasCartas>
+          <h3>Cartas do Computador</h3>
+          {this.state.cartasPC.map((iten)=>{
+            return(
+              <div>
+                <p>{iten.texto}</p>
+              </div>
+            
+          )
+          })}
+          <p>Valor Total = {valorTotalPC}</p>
+
+        </DivdasCartas>
+
+        <div className="perdeu">
+          <h1>O JOGO TERMINOU EMPATADO!</h1>
+          <button>Jogar Novamente</button>
+        </div>
+      </PagCartas>
+      )
+    }
+
+    if (valorTotalUsuário < valorTotalPC){
+      return(
+        <PagCartas>
+        <DivdasCartas>
+          <h3>Cartas do Usuário</h3>
+          {this.state.cartasUsuario.map((iten)=>{
+            return(
+              <div>
+                <p>{iten.texto}</p>
+              </div>
+            
+          )
+          })}
+          <p>Valor Total = {valorTotalUsuário}</p>
+        </DivdasCartas>
+
+        <DivdasCartas>
+          <h3>Cartas do Computador</h3>
+          {this.state.cartasPC.map((iten)=>{
+            return(
+              <div>
+                <p>{iten.texto}</p>
+              </div>
+            
+          )
+          })}
+          <p>Valor Total = {valorTotalPC}</p>
+
+        </DivdasCartas>
+
+        <div className="perdeu">
+          <h1>O COMPUTADOR VENCEU!</h1>
+          <button>Jogar Novamente</button>
+        </div>
+      </PagCartas>
+      )
+    }
+  }
+
+
   render() {
     return (
       <ContainerPai>
