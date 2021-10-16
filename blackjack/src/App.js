@@ -181,6 +181,45 @@ class App extends React.Component {
       if(valorTotalPC > 21) {
         return(
           <PagCartas>
+            <DivdasCartas>
+              <h3>Cartas do Usuário</h3>
+              {this.state.cartasUsuario.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+              
+              )
+              })}
+              <p>Valor Total = {valorTotalUsuário}</p>
+            </DivdasCartas>
+  
+            <DivdasCartas>
+              <h3>Cartas do Computador</h3>
+              {this.state.cartasPC.map((iten)=>{
+                return(
+                  <div>
+                    <p>{iten.texto}</p>
+                  </div>
+              
+              )
+              })}
+              <p>Valor Total = {valorTotalPC}</p>
+
+            </DivdasCartas>
+  
+            <div className="perdeu">
+              <h1>PARABÉNS! VOCÊ GANHOU!</h1>
+              <button onClick={this.jogarNovamente}>Jogar Novamente</button>
+            </div>
+          </PagCartas>
+          )
+        }
+    }
+
+    if(valorTotalPC === valorTotalUsuário) {
+      return(
+        <PagCartas>
           <DivdasCartas>
             <h3>Cartas do Usuário</h3>
             {this.state.cartasUsuario.map((iten)=>{
@@ -188,12 +227,50 @@ class App extends React.Component {
                 <div>
                   <p>{iten.texto}</p>
                 </div>
-              
+            
             )
             })}
             <p>Valor Total = {valorTotalUsuário}</p>
           </DivdasCartas>
-  
+
+          <DivdasCartas>
+            <h3>Cartas do Computador</h3>
+            {this.state.cartasPC.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+            
+            )
+            })}
+            <p>Valor Total = {valorTotalPC}</p>
+
+          </DivdasCartas>
+
+          <div className="perdeu">
+            <h1>O JOGO TERMINOU EMPATADO!</h1>
+            <button onClick={this.jogarNovamente}>Jogar Novamente</button>
+          </div>
+        </PagCartas>
+      )
+    }
+
+    if (valorTotalUsuário < valorTotalPC){
+      return(
+        <PagCartas>
+          <DivdasCartas>
+            <h3>Cartas do Usuário</h3>
+            {this.state.cartasUsuario.map((iten)=>{
+              return(
+                <div>
+                  <p>{iten.texto}</p>
+                </div>
+            
+            )
+            })}
+            <p>Valor Total = {valorTotalUsuário}</p>
+          </DivdasCartas>
+
           <DivdasCartas>
             <h3>Cartas do Computador</h3>
             {this.state.cartasPC.map((iten)=>{
@@ -207,89 +284,12 @@ class App extends React.Component {
             <p>Valor Total = {valorTotalPC}</p>
 
           </DivdasCartas>
-  
+
           <div className="perdeu">
-            <h1>PARABÉNS! VOCÊ GANHOU!</h1>
+            <h1>O COMPUTADOR VENCEU!</h1>
             <button onClick={this.jogarNovamente}>Jogar Novamente</button>
           </div>
         </PagCartas>
-        )
-      }
-    }
-
-    if(valorTotalPC === valorTotalUsuário) {
-      return(
-        <PagCartas>
-        <DivdasCartas>
-          <h3>Cartas do Usuário</h3>
-          {this.state.cartasUsuario.map((iten)=>{
-            return(
-              <div>
-                <p>{iten.texto}</p>
-              </div>
-            
-          )
-          })}
-          <p>Valor Total = {valorTotalUsuário}</p>
-        </DivdasCartas>
-
-        <DivdasCartas>
-          <h3>Cartas do Computador</h3>
-          {this.state.cartasPC.map((iten)=>{
-            return(
-              <div>
-                <p>{iten.texto}</p>
-              </div>
-            
-          )
-          })}
-          <p>Valor Total = {valorTotalPC}</p>
-
-        </DivdasCartas>
-
-        <div className="perdeu">
-          <h1>O JOGO TERMINOU EMPATADO!</h1>
-          <button onClick={this.jogarNovamente}>Jogar Novamente</button>
-        </div>
-      </PagCartas>
-      )
-    }
-
-    if (valorTotalUsuário < valorTotalPC){
-      return(
-        <PagCartas>
-        <DivdasCartas>
-          <h3>Cartas do Usuário</h3>
-          {this.state.cartasUsuario.map((iten)=>{
-            return(
-              <div>
-                <p>{iten.texto}</p>
-              </div>
-            
-          )
-          })}
-          <p>Valor Total = {valorTotalUsuário}</p>
-        </DivdasCartas>
-
-        <DivdasCartas>
-          <h3>Cartas do Computador</h3>
-          {this.state.cartasPC.map((iten)=>{
-            return(
-              <div>
-                <p>{iten.texto}</p>
-              </div>
-            
-          )
-          })}
-          <p>Valor Total = {valorTotalPC}</p>
-
-        </DivdasCartas>
-
-        <div className="perdeu">
-          <h1>O COMPUTADOR VENCEU!</h1>
-          <button onClick={this.jogarNovamente}>Jogar Novamente</button>
-        </div>
-      </PagCartas>
       )
     }
   }

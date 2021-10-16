@@ -6,6 +6,15 @@ export const ContainerPai = styled.div`
   align-items: center;
   gap: 30px;
 
+  @media screen and (min-device-width : 320px) and (max-device-width : 480px){
+    div{
+        align-items: center;
+        h1{
+            text-align: center;
+
+        }
+    }
+  }
 
 `
 
@@ -16,6 +25,7 @@ export const DivdasCartas = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+
 `
 
 export const PagCartas = styled.div `
@@ -36,5 +46,10 @@ export const PagCartas = styled.div `
             width: 90px;
             margin: 10px;
         }
+    }
+
+    @media screen and (min-device-width : 320px) and (max-device-width : 480px){
+        display: flex;
+        flex-direction: column;
     }
 `
